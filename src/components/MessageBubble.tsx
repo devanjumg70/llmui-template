@@ -1,8 +1,6 @@
 import React from 'react';
 import { Box, Avatar, Typography } from '@mui/material';
 import ReactMarkdown from 'react-markdown';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { oneDark, oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { Message } from '../types/chat';
 
 interface MessageBubbleProps {
@@ -51,19 +49,9 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ message, theme }) => {
             <Box className="prose prose-sm max-w-none">
               <ReactMarkdown
                 components={{
-                  code({ node, inline, className, children, ...props }) {
+                  code({ node, className, children, ...props }) {
                     const match = /language-(\w+)/.exec(className || '');
-                    return !inline && match ? (
-                      <SyntaxHighlighter
-                        style={theme === 'dark' ? oneDark : oneLight}
-                        language={match[1]}
-                        PreTag="div"
-                        className="rounded-lg !mt-3 !mb-3"
-                        {...props}
-                      >
-                        {String(children).replace(/\n$/, '')}
-                      </SyntaxHighlighter>
-                    ) : (
+                    return (
                       <code 
                         className={`
                           px-2 py-1 rounded text-sm font-mono

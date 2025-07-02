@@ -122,7 +122,6 @@ const CustomTooltip: React.FC<CustomTooltipProps> = ({
         pointerEvents: 'none',
       }}
       role="tooltip"
-      aria-hidden={!isVisible}
     >
       <div
         className={`

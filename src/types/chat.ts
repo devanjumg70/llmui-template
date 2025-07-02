@@ -24,6 +24,7 @@ export interface ChatInterface {
 
 export interface TypingIndicatorProps {
   isVisible: boolean;
+  theme: 'light' | 'dark';
 }
 
 export interface MessageBubbleProps {
