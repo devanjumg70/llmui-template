@@ -1,0 +1,349 @@
+/* Custom Scrollbar Styles for Chat Interface */
+
+/* ===== WEBKIT SCROLLBARS (Chrome, Safari, Edge) ===== */
+
+/* Base scrollbar styling */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.4);
+  border-radius: 4px;
+  border: 1px solid transparent;
+  background-clip: padding-box;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  min-height: 20px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.6);
+  transform: scaleY(1.1);
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:active {
+  background: rgba(148, 163, 184, 0.8);
+  transform: scaleY(1.2);
+}
+
+.custom-scrollbar::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* ===== DARK THEME SCROLLBARS ===== */
+
+.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(156, 163, 175, 0.3);
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(156, 163, 175, 0.5);
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-thumb:active {
+  background: rgba(156, 163, 175, 0.7);
+}
+
+/* ===== TEXTBOX SPECIFIC SCROLLBARS ===== */
+
+/* Smaller scrollbars for text inputs */
+.textbox-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.textbox-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.3);
+  border-radius: 3px;
+  min-height: 16px;
+}
+
+.textbox-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.5);
+}
+
+.dark .textbox-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(156, 163, 175, 0.25);
+}
+
+.dark .textbox-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(156, 163, 175, 0.4);
+}
+
+/* ===== FIREFOX SCROLLBARS ===== */
+
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.4) transparent;
+}
+
+.dark .custom-scrollbar {
+  scrollbar-color: rgba(156, 163, 175, 0.3) transparent;
+}
+
+.textbox-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.3) transparent;
+}
+
+.dark .textbox-scrollbar {
+  scrollbar-color: rgba(156, 163, 175, 0.25) transparent;
+}
+
+/* ===== RESPONSIVE SCROLLBARS ===== */
+
+/* Mobile devices - slightly larger for touch */
+@media (max-width: 768px) {
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(148, 163, 184, 0.5);
+    min-height: 24px;
+  }
+  
+  .textbox-scrollbar::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  .textbox-scrollbar::-webkit-scrollbar-thumb {
+    min-height: 20px;
+  }
+}
+
+/* Tablet devices */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 9px;
+    height: 9px;
+  }
+}
+
+/* ===== HIGH CONTRAST MODE ===== */
+
+@media (prefers-contrast: high) {
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+  }
+  
+  .custom-scrollbar {
+    scrollbar-color: rgba(0, 0, 0, 0.8) transparent;
+  }
+  
+  .dark .custom-scrollbar {
+    scrollbar-color: rgba(255, 255, 255, 0.8) transparent;
+  }
+}
+
+/* ===== REDUCED MOTION ===== */
+
+@media (prefers-reduced-motion: reduce) {
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    transition: none;
+    transform: none;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover,
+  .custom-scrollbar::-webkit-scrollbar-thumb:active {
+    transform: none;
+  }
+}
+
+/* ===== CHAT SPECIFIC SCROLLBARS ===== */
+
+/* Messages container */
+.messages-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.messages-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.2);
+  border-radius: 3px;
+}
+
+.messages-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.4);
+}
+
+.dark .messages-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(156, 163, 175, 0.15);
+}
+
+.dark .messages-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(156, 163, 175, 0.3);
+}
+
+/* Sidebar scrollbar */
+.sidebar-scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+
+.sidebar-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.25);
+  border-radius: 2.5px;
+}
+
+.sidebar-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.4);
+}
+
+.dark .sidebar-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(156, 163, 175, 0.2);
+}
+
+.dark .sidebar-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(156, 163, 175, 0.35);
+}
+
+/* ===== UTILITY CLASSES ===== */
+
+/* Hide scrollbar but keep functionality */
+.scrollbar-hidden {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+/* Always show scrollbar */
+.scrollbar-always {
+  overflow-y: scroll;
+}
+
+.scrollbar-always::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollbar-always::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.4);
+  border-radius: 4px;
+}
+
+/* Smooth scrolling behavior */
+.smooth-scroll {
+  scroll-behavior: smooth;
+}
+
+/* ===== FOCUS INDICATORS FOR ACCESSIBILITY ===== */
+
+.custom-scrollbar:focus-within::-webkit-scrollbar-thumb {
+  background: rgba(66, 133, 244, 0.6);
+  outline: 2px solid rgba(66, 133, 244, 0.3);
+  outline-offset: 1px;
+}
+
+.dark .custom-scrollbar:focus-within::-webkit-scrollbar-thumb {
+  background: rgba(96, 165, 250, 0.6);
+  outline: 2px solid rgba(96, 165, 250, 0.3);
+}
+
+/* ===== BROWSER SPECIFIC FIXES ===== */
+
+/* Edge specific fixes */
+@supports (-ms-overflow-style: none) {
+  .custom-scrollbar {
+    -ms-overflow-style: auto;
+  }
+}
+
+/* Safari specific optimizations */
+@supports (-webkit-appearance: none) {
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    -webkit-appearance: none;
+  }
+}
+
+/* ===== ANIMATION KEYFRAMES ===== */
+
+@keyframes scrollbar-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scrollbar-pulse {
+  0%, 100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+/* ===== LOADING STATE SCROLLBARS ===== */
+
+.loading-scrollbar::-webkit-scrollbar-thumb {
+  animation: scrollbar-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* ===== HOVER ZONE EXPANSION ===== */
+
+.custom-scrollbar::-webkit-scrollbar:hover {
+  width: 12px;
+}
+
+.custom-scrollbar::-webkit-scrollbar:horizontal:hover {
+  height: 12px;
+}
+
+/* ===== CUSTOM PROPERTIES FOR DYNAMIC THEMING ===== */
+
+:root {
+  --scrollbar-width: 8px;
+  --scrollbar-thumb-color: rgba(148, 163, 184, 0.4);
+  --scrollbar-thumb-hover-color: rgba(148, 163, 184, 0.6);
+  --scrollbar-thumb-active-color: rgba(148, 163, 184, 0.8);
+  --scrollbar-track-color: transparent;
+  --scrollbar-border-radius: 4px;
+}
+
+.dark {
+  --scrollbar-thumb-color: rgba(156, 163, 175, 0.3);
+  --scrollbar-thumb-hover-color: rgba(156, 163, 175, 0.5);
+  --scrollbar-thumb-active-color: rgba(156, 163, 175, 0.7);
+}
+
+/* Dynamic scrollbar using custom properties */
+.dynamic-scrollbar::-webkit-scrollbar {
+  width: var(--scrollbar-width);
+  height: var(--scrollbar-width);
+}
+
+.dynamic-scrollbar::-webkit-scrollbar-track {
+  background: var(--scrollbar-track-color);
+  border-radius: var(--scrollbar-border-radius);
+}
+
+.dynamic-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb-color);
+  border-radius: var(--scrollbar-border-radius);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dynamic-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover-color);
+}
+
+.dynamic-scrollbar::-webkit-scrollbar-thumb:active {
+  background: var(--scrollbar-thumb-active-color);
+}

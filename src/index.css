@@ -1,0 +1,346 @@
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@300;400;500;600;700&display=swap');
+@import './styles/scrollbar.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Root variables for consistent theming */
+:root {
+  --transition-duration: 300ms;
+  --transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
+  --touch-target-size: 48px;
+  --tooltip-bg: #333;
+  --tooltip-text: #fff;
+  --tooltip-border-radius: 4px;
+  --tooltip-arrow-size: 6px;
+  --tooltip-max-width: 250px;
+  --tooltip-padding: 8px 12px;
+  --tooltip-font-size: 14px;
+  --tooltip-line-height: 1.4;
+  --tooltip-offset: 8px;
+}
+
+/* Custom Tooltip Styles */
+.tooltip-container {
+  animation: tooltipFadeIn 0.2s ease-out;
+}
+
+.tooltip-content {
+  background-color: var(--tooltip-bg);
+  color: var(--tooltip-text);
+  padding: var(--tooltip-padding);
+  border-radius: var(--tooltip-border-radius);
+  font-size: var(--tooltip-font-size);
+  line-height: var(--tooltip-line-height);
+  font-weight: 500;
+  max-width: var(--tooltip-max-width);
+  word-wrap: break-word;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  position: relative;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tooltip-content.multiline {
+  white-space: normal;
+}
+
+.tooltip-arrow {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+
+.tooltip-arrow-top {
+  bottom: calc(-1 * var(--tooltip-arrow-size));
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: var(--tooltip-arrow-size) solid transparent;
+  border-right: var(--tooltip-arrow-size) solid transparent;
+  border-top: var(--tooltip-arrow-size) solid var(--tooltip-bg);
+}
+
+.tooltip-arrow-bottom {
+  top: calc(-1 * var(--tooltip-arrow-size));
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: var(--tooltip-arrow-size) solid transparent;
+  border-right: var(--tooltip-arrow-size) solid transparent;
+  border-bottom: var(--tooltip-arrow-size) solid var(--tooltip-bg);
+}
+
+.tooltip-trigger {
+  display: inline-block;
+}
+
+@keyframes tooltipFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Touch target guidelines */
+.touch-target {
+  min-width: var(--touch-target-size);
+  min-height: var(--touch-target-size);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Icon button base styles */
+.icon-button {
+  width: var(--touch-target-size);
+  height: var(--touch-target-size);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-duration) var(--transition-timing);
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.icon-button:hover {
+  transform: scale(1.05);
+}
+
+.icon-button:active {
+  transform: scale(0.95);
+}
+
+.icon-button:disabled {
+  transform: none;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* Ripple effect for touch feedback */
+.icon-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.1;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s, height 0.3s;
+}
+
+.icon-button:active::before {
+  width: 100%;
+  height: 100%;
+}
+
+/* Smooth transitions for theme changes */
+* {
+  transition: background-color var(--transition-duration) var(--transition-timing),
+              color var(--transition-duration) var(--transition-timing),
+              border-color var(--transition-duration) var(--transition-timing),
+              transform var(--transition-duration) var(--transition-timing);
+}
+
+/* Remove transitions for motion-sensitive users */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .icon-button:hover,
+  .icon-button:active {
+    transform: none;
+  }
+  
+  .tooltip-container {
+    animation: none;
+  }
+}
+
+/* Enhanced focus styles for accessibility */
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+.icon-button:focus-visible {
+  outline: 2px solid #4285f4;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Custom animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce {
+  0%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Ensure proper text rendering */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-family: 'Google Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Improve button and interactive element styling */
+button, [role="button"] {
+  cursor: pointer;
+  user-select: none;
+}
+
+button:disabled, [role="button"]:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* Ensure proper contrast for text */
+.dark {
+  color-scheme: dark;
+}
+
+/* Selection styles */
+::selection {
+  background-color: rgba(66, 133, 244, 0.3);
+}
+
+.dark ::selection {
+  background-color: rgba(66, 133, 244, 0.4);
+}
+
+/* Touch-friendly spacing */
+.touch-spacing {
+  padding: 8px;
+  margin: 4px;
+}
+
+/* Interactive element states */
+.interactive-element {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.interactive-element:hover {
+  transform: scale(1.02);
+}
+
+.interactive-element:active {
+  transform: scale(0.98);
+}
+
+/* Responsive design helpers */
+@media (max-width: 768px) {
+  .sidebar-mobile {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 50;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .sidebar-mobile.open {
+    transform: translateX(0);
+  }
+  
+  /* Increase touch targets on mobile */
+  .icon-button {
+    width: 56px;
+    height: 56px;
+  }
+  
+  /* Adjust tooltip for mobile */
+  .tooltip-content {
+    font-size: 16px;
+    padding: 10px 14px;
+    max-width: calc(100vw - 32px);
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .icon-button {
+    border: 2px solid currentColor;
+  }
+  
+  .tooltip-content {
+    border: 1px solid #fff;
+  }
+}
+
+/* Loading states */
+.loading {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Dark theme tooltip adjustments */
+.dark .tooltip-content {
+  background-color: #1f2937;
+  color: #f9fafb;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.dark .tooltip-arrow-top {
+  border-top-color: #1f2937;
+}
+
+.dark .tooltip-arrow-bottom {
+  border-bottom-color: #1f2937;
+}
+
+/* Tooltip positioning adjustments for edge cases */
+.tooltip-content.edge-left {
+  transform-origin: left center;
+}
+
+.tooltip-content.edge-right {
+  transform-origin: right center;
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .tooltip-container {
+    animation: none;
+  }
+}
+
+/* Focus management for tooltips */
+.tooltip-trigger:focus-within .tooltip-content {
+  outline: 2px solid #4285f4;
+  outline-offset: 2px;
+}
