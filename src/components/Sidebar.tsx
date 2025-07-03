@@ -1,3 +1,4 @@
+// Import necessary React hooks and components from Material-UI and other libraries.
 import React, { useState } from 'react';
 import { 
   Box, 
@@ -20,20 +21,23 @@ import {
   Menu,
   Close
 } from '@mui/icons-material';
+// Import custom types and components.
 import { ChatHistory } from '../types/chat';
 import CustomTooltip from './CustomTooltip';
 
+// Define the properties (props) that the Sidebar component accepts.
 interface SidebarProps {
-  chatHistory: ChatHistory[];
-  activeChat: string | null;
-  onSelectChat: (chatId: string) => void;
-  onNewChat: () => void;
-  onToggleTheme: () => void;
-  theme: 'light' | 'dark';
-  isOpen: boolean;
-  onToggleSidebar: () => void;
+  chatHistory: ChatHistory[]; // Array of chat history items.
+  activeChat: string | null; // The ID of the currently active chat.
+  onSelectChat: (chatId: string) => void; // Function to handle selecting a chat.
+  onNewChat: () => void; // Function to handle creating a new chat.
+  onToggleTheme: () => void; // Function to toggle the color theme.
+  theme: 'light' | 'dark'; // The current theme.
+  isOpen: boolean; // State of the sidebar (open or closed).
+  onToggleSidebar: () => void; // Function to toggle the sidebar's visibility.
 }
 
+// The main Sidebar component.
 const Sidebar: React.FC<SidebarProps> = ({
   chatHistory,
   activeChat,
@@ -44,36 +48,44 @@ const Sidebar: React.FC<SidebarProps> = ({
   isOpen,
   onToggleSidebar,
 }) => {
+  // State to hold the current search query.
   const [searchQuery, setSearchQuery] = useState('');
 
+  // Filter the chat history based on the search query.
   const filteredHistory = chatHistory.filter(chat =>
     chat.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  // Function to format the date of the last message for display.
   const formatTime = (date: Date) => {
     const now = new Date();
     const diff = now.getTime() - date.getTime();
     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
     
     if (days === 0) {
+      // If the message was sent today, show the time.
       return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     } else if (days === 1) {
+      // If the message was sent yesterday, show 'Yesterday'.
       return 'Yesterday';
     } else if (days < 7) {
+      // If the message was sent within the last week, show the number of days ago.
       return `${days} days ago`;
     } else {
+      // Otherwise, show the full date.
       return date.toLocaleDateString();
     }
   };
 
   return (
     <Box className="h-full flex flex-col">
-      {/* Header */}
+      {/* Header section of the sidebar. */}
       <Box className={`
         p-4 border-b
         ${theme === 'dark' ? 'border-gray-700' : 'border-gray-200'}
       `}>
         <Box className="flex items-center justify-between mb-4">
+          {/* Title of the application. */}
           <Typography variant="h6" className={`
             font-semibold
             ${theme === 'dark' ? 'text-gray-100' : 'text-gray-900'}
@@ -81,6 +93,7 @@ const Sidebar: React.FC<SidebarProps> = ({
             Gemini
           </Typography>
           <Box className="flex items-center">
+            {/* Theme toggle button with a custom tooltip. */}
             <CustomTooltip content={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}>
               <IconButton
                 onClick={onToggleTheme}
@@ -106,6 +119,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                 {theme === 'light' ? <DarkMode /> : <LightMode />}
               </IconButton>
             </CustomTooltip>
+            {/* Button to close the sidebar. */}
             <CustomTooltip content="Close sidebar">
               <IconButton
                 onClick={onToggleSidebar}
@@ -134,7 +148,7 @@ const Sidebar: React.FC<SidebarProps> = ({
           </Box>
         </Box>
 
-        {/* New Chat Button */}
+        {/* Button to start a new chat. */}
         <CustomTooltip content="Start a new conversation">
           <Box
             onClick={onNewChat}
@@ -161,7 +175,7 @@ const Sidebar: React.FC<SidebarProps> = ({
         </CustomTooltip>
       </Box>
 
-      {/* Search */}
+      {/* Search input field to filter chat conversations. */}
       <Box className="p-4">
         <TextField
           fullWidth
@@ -201,9 +215,9 @@ const Sidebar: React.FC<SidebarProps> = ({
         />
       </Box>
 
-      {/* Chat History */}
+      {/* Section for displaying the chat history. */}
       <Box className="flex-1 overflow-y-auto sidebar-scrollbar smooth-scroll">
-        {/* Recent Section */}
+        {/* "Recent" section title, only shown if there is chat history. */}
         {filteredHistory.length > 0 && (
           <Box className="px-4 pb-2">
             <Typography variant="caption" className={`
@@ -215,9 +229,10 @@ const Sidebar: React.FC<SidebarProps> = ({
           </Box>
         )}
 
+        {/* List of chat history items. */}
         <List className="px-2">
           {filteredHistory.map((chat) => (
-            <ListItem key={chat.id} disablePadding className="mb-1">
+            <ListItem key={chat.id} disablePadding className="mb-1 px-0">
               <CustomTooltip content={chat.title}>
                 <ListItemButton
                   onClick={() => onSelectChat(chat.id)}
@@ -235,7 +250,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                   `}
                   sx={{ 
                     borderRadius: '12px',
-                    padding: '12px 16px',
+                    width: '100%',
                     '&:hover': {
                       transform: 'scale(1.02)',
                     },
@@ -244,6 +259,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                     }
                   }}
                 >
+                  {/* Chat icon. */}
                   <Box className={`
                     w-6 h-6 mr-3 flex items-center justify-center
                     ${activeChat === chat.id
@@ -253,6 +269,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                   `}>
                     <Chat />
                   </Box>
+                  {/* Chat title and last message time. */}
                   <ListItemText
                     primary={
                       <Typography variant="body2" className="font-medium truncate">
@@ -273,6 +290,7 @@ const Sidebar: React.FC<SidebarProps> = ({
           ))}
         </List>
 
+        {/* Message to display when no conversations are found from a search. */}
         {filteredHistory.length === 0 && searchQuery && (
           <Box className="p-4 text-center">
             <Typography variant="body2" className={`
